@@ -1,0 +1,23 @@
+.item {
+    padding: 3%;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+}
+
+.high-priority {
+    background-color: #ffcccc;
+}
+
+.in-progress-priority {
+    background-color: #ffffcc;
+}
+
+.to-do-priority {
+    background-color: #ccffcc;
+}

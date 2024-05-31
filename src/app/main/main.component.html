@@ -5,11 +5,11 @@
             <div
             class="list"
             cdkDropList
-            [cdkDropListData]="section.cards"
+            [cdkDropListData]="section.items"
             (cdkDropListDropped)="drop($event)"
             >
-                @for(card of section.cards; track $index){
-                    <div class="item" cdkDrag>{{card}}</div>
+                @for(card of section.items; track $index){
+                    <app-item [item]="card" cdkDrag></app-item>
                 }
             </div>
         }
