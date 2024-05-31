@@ -55,7 +55,5 @@ export class ItemDialog {
   constructor(
     public dialogRef: MatDialogRef<ItemDialog>,
     @Inject(MAT_DIALOG_DATA) public data: TodoItem
-  ) {
-    this.selectedValue = data.priority;
-  }
+  ) {}
 }
