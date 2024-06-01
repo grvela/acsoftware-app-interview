@@ -33,7 +33,7 @@ interface todoItemI {
 export class MainComponent {
   sections: todoItemI[] = [
     {
-      title: 'Todo',
+      title: 'TO DO',
       items: [
         {
           id: 1,
@@ -43,29 +43,53 @@ export class MainComponent {
           updatedAt: new Date('2023-05-30T10:00:00Z'),
           createdAt: new Date('2023-05-30T12:00:00Z'),
         },
-      ],
-    },
-    {
-      title: 'In Progress',
-      items: [
         {
           id: 1,
-          title: 'Task Title 2',
+          title: 'Task Title 5',
           description: 'Task Description',
-          priority: 'to-do',
+          priority: 'low',
           updatedAt: new Date('2023-05-30T10:00:00Z'),
           createdAt: new Date('2023-05-30T12:00:00Z'),
         },
       ],
     },
     {
-      title: 'Done',
+      title: 'IN PROGRESS',
+      items: [
+        {
+          id: 1,
+          title: 'Task Title 2',
+          description: 'Task Description',
+          priority: 'medium',
+          updatedAt: new Date('2023-05-30T10:00:00Z'),
+          createdAt: new Date('2023-05-30T12:00:00Z'),
+        },
+        {
+          id: 1,
+          title: 'Task Title 4',
+          description: 'Task Description',
+          priority: 'high',
+          updatedAt: new Date('2023-05-30T10:00:00Z'),
+          createdAt: new Date('2023-05-30T12:00:00Z'),
+        },
+        {
+          id: 1,
+          title: 'Task Title 6',
+          description: 'Task Description',
+          priority: 'low',
+          updatedAt: new Date('2023-05-30T10:00:00Z'),
+          createdAt: new Date('2023-05-30T12:00:00Z'),
+        },
+      ],
+    },
+    {
+      title: 'DONE',
       items: [
         {
           id: 1,
           title: 'Task Title 3',
           description: 'Task Description',
-          priority: 'in-progress',
+          priority: 'medium',
           updatedAt: new Date('2023-05-30T10:00:00Z'),
           createdAt: new Date('2023-05-30T12:00:00Z'),
         },

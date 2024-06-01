@@ -42,10 +42,10 @@ export class ItemComponent {
     switch (priority) {
       case 'high':
         return 'high-priority';
-      case 'in-progress':
-        return 'in-progress-priority';
-      case 'to-do':
-        return 'to-do-priority';
+      case 'medium':
+        return 'medium-priority';
+      case 'low':
+        return 'low-priority';
       default:
         return '';
     }

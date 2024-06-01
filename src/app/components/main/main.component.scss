@@ -1,10 +1,10 @@
 .list-container {
     max-width: 100%;
-    border: 1px solid red;
 }
 
 .list {
-    border: solid 1px #ccc;
+    border: solid 2px #ccc;
+    min-height: 60px;
     background: white;
     border-radius: 4px;
     overflow: hidden;
@@ -12,16 +12,14 @@
 }
 
 .item {
-    padding: 3%;
     border-bottom: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
     background: white;
-    
 }
 
 .cdk-drag-preview {
@@ -46,4 +44,8 @@
 
 .list.cdk-drop-list-dragging .item:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.title{
+    color: #555555;
 }

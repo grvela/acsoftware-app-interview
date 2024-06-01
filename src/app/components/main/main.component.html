@@ -1,15 +1,15 @@
 <div  cdkDropListGroup>
     <div class="list-container">
         @for (section of sections; track section) {
-            <h2>{{section.title}}</h2>
+            <h3 class="title">{{section.title}}</h3>
             <div
-            class="list"
             cdkDropList
             [cdkDropListData]="section.items"
+            class="list"
             (cdkDropListDropped)="drop($event)"
             >
                 @for(card of section.items; track $index){
-                    <app-item [item]="card" cdkDrag></app-item>
+                    <app-item [item]="card" class="item" cdkDrag></app-item>
                 }
             </div>
         }

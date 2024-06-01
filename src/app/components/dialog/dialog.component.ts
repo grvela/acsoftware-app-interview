@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 interface TodoItem {
   id: number;
@@ -41,6 +42,7 @@ interface Food {
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatGridListModule,
   ],
 })
 export class ItemDialog {
