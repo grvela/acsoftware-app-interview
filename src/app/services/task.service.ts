@@ -5,6 +5,7 @@ interface TodoItem {
     id: number;
     title: string;
     description: string;
+    status: string;
     priority: string;
     position: number;
     createdAt: Date;
@@ -32,9 +33,10 @@ export class TaskService{
         return this.http.get<todoItemI[]>(`${this.apiUrl}/task`);
     }
 
-    updatePosition(task_id: number, position: number){
+    updatePosition(task_id: number, position: number, status: string){
         return this.http.patch(`${this.apiUrl}/task/` + task_id, {
-            "position": position
+            position,
+            status
         })
     }
 

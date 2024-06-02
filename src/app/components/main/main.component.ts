@@ -15,6 +15,7 @@ interface TodoItem {
   id: number;
   title: string;
   description: string;
+  status: string;
   priority: string;
   position: number;
   createdAt: Date;
@@ -50,28 +51,39 @@ export class MainComponent {
     ).subscribe();
   }
 
-  drop(event: CdkDragDrop<TodoItem[]>) {
+  dropEvent(event: CdkDragDrop<TodoItem[]>) {
+    const fromList = event.previousContainer.data; 
+    const toList = event.container.data; 
+    const status = this.getStatusFromIndex(event.container.id); 
+  
     if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      moveItemInArray(toList, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      transferArrayItem(fromList, toList, event.previousIndex, event.currentIndex);
+      toList.forEach(item => item.status = status);
     }
-      
-    event.container.data.map((item, index) => {
-      
+  
+    fromList.forEach((item, index) => {
+      item.position = index;
+      this.taskService.updatePosition(item.id, index, item.status).subscribe();
     });
-    console.log('Updated container data:', event.container.data);
-    if (event.previousContainer !== event.container) {
-      console.log('Updated previous container data:', event.previousContainer.data);
+  
+    toList.forEach((item, index) => {
+      item.position = index;
+      this.taskService.updatePosition(item.id, index, item.status).subscribe();
+    });
+  }
+  
+  getStatusFromIndex(containerId: string): string {
+    switch (containerId) {
+      case 'cdk-drop-list-0':
+        return 'to-do';
+      case 'cdk-drop-list-1':
+        return 'in-progress';
+      case 'cdk-drop-list-2':
+        return 'done';
+      default:
+        return ''; 
     }
   }
 }

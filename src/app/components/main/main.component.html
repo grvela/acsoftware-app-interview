@@ -6,7 +6,7 @@
             cdkDropList
             [cdkDropListData]="section.items"
             class="list"
-            (cdkDropListDropped)="drop($event)"
+            (cdkDropListDropped)="dropEvent($event)"
             >
                 @for(card of section.items; track $index){
                     <app-item [item]="card" class="item" cdkDrag></app-item>
