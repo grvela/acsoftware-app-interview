@@ -4,21 +4,22 @@
     <div>
         <mat-form-field class="item">
             <mat-label>Title</mat-label>
-            <input matInput value="{{data.title}}">
+            <input matInput [(ngModel)]="data.title">
         </mat-form-field>
     </div>
     
     <div>
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <textarea matInput value="{{data.description}}"></textarea>
+            <textarea matInput [(ngModel)]="data.description"></textarea>
         </mat-form-field>
     </div>
     <div>
         <mat-form-field>
-            <mat-select [(value)]="data.priority">
-                @for (priority of priorities; track $index) {
-                <mat-option [value]="data.priority">{{priority.viewValue}}</mat-option>
+            <mat-label>Description</mat-label>
+            <mat-select [(ngModel)]="data.priority">
+                @for(priority of priorities; track $index){
+                    <mat-option [value]="priority.value">{{priority.viewValue}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -27,7 +28,7 @@
 
 
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Delete</button>
+    <button mat-button (click)="onDelete()">Delete</button>
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button mat-dialog-close >Save</button>
+    <button mat-button (click)="onSave()">Save</button>
 </mat-dialog-actions>

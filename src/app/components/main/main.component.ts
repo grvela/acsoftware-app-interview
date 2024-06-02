@@ -8,12 +8,15 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { ItemComponent } from '../item/item.component';
+import { TaskService } from '../../services/task.service';
+import { Observable, tap, catchError, of } from 'rxjs';
 
 interface TodoItem {
   id: number;
   title: string;
   description: string;
   priority: string;
+  position: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,71 +34,21 @@ interface todoItemI {
   styleUrl: './main.component.scss',
 })
 export class MainComponent {
-  sections: todoItemI[] = [
-    {
-      title: 'TO DO',
-      items: [
-        {
-          id: 1,
-          title: 'Task Title 1',
-          description: 'Task Description',
-          priority: 'high',
-          updatedAt: new Date('2023-05-30T10:00:00Z'),
-          createdAt: new Date('2023-05-30T12:00:00Z'),
-        },
-        {
-          id: 1,
-          title: 'Task Title 5',
-          description: 'Task Description',
-          priority: 'low',
-          updatedAt: new Date('2023-05-30T10:00:00Z'),
-          createdAt: new Date('2023-05-30T12:00:00Z'),
-        },
-      ],
-    },
-    {
-      title: 'IN PROGRESS',
-      items: [
-        {
-          id: 1,
-          title: 'Task Title 2',
-          description: 'Task Description',
-          priority: 'medium',
-          updatedAt: new Date('2023-05-30T10:00:00Z'),
-          createdAt: new Date('2023-05-30T12:00:00Z'),
-        },
-        {
-          id: 1,
-          title: 'Task Title 4',
-          description: 'Task Description',
-          priority: 'high',
-          updatedAt: new Date('2023-05-30T10:00:00Z'),
-          createdAt: new Date('2023-05-30T12:00:00Z'),
-        },
-        {
-          id: 1,
-          title: 'Task Title 6',
-          description: 'Task Description',
-          priority: 'low',
-          updatedAt: new Date('2023-05-30T10:00:00Z'),
-          createdAt: new Date('2023-05-30T12:00:00Z'),
-        },
-      ],
-    },
-    {
-      title: 'DONE',
-      items: [
-        {
-          id: 1,
-          title: 'Task Title 3',
-          description: 'Task Description',
-          priority: 'medium',
-          updatedAt: new Date('2023-05-30T10:00:00Z'),
-          createdAt: new Date('2023-05-30T12:00:00Z'),
-        },
-      ],
-    },
-  ];
+  sections: todoItemI[] = [];
+
+  constructor(private taskService: TaskService){}
+
+  ngOnInit(){
+    this.taskService.getAllLists().pipe(
+      tap(response => {
+        console.log(response);
+        this.sections = response;
+      }),
+      catchError(error => {
+        return of(null);
+      })
+    ).subscribe();
+  }
 
   drop(event: CdkDragDrop<TodoItem[]>) {
     if (event.previousContainer === event.container) {
@@ -111,6 +64,14 @@ export class MainComponent {
         event.previousIndex,
         event.currentIndex
       );
+    }
+      
+    event.container.data.map((item, index) => {
+      
+    });
+    console.log('Updated container data:', event.container.data);
+    if (event.previousContainer !== event.container) {
+      console.log('Updated previous container data:', event.previousContainer.data);
     }
   }
 }

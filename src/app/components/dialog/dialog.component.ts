@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { TaskService } from '../../services/task.service';
 
 interface TodoItem {
   id: number;
@@ -23,7 +24,7 @@ interface TodoItem {
   updatedAt: Date;
 }
 
-interface Food {
+interface TaskPriority {
   value: string;
   viewValue: string;
 }
@@ -48,14 +49,28 @@ interface Food {
 export class ItemDialog {
   selectedValue: string | undefined;
 
-  priorities: Food[] = [
+  priorities: TaskPriority[] = [
     { value: 'high', viewValue: 'High' },
-    { value: 'in-progress', viewValue: 'In Progress' },
-    { value: 'to-do', viewValue: 'To do' },
+    { value: 'medium', viewValue: 'Medium' },
+    { value: 'low', viewValue: 'low' },
   ];
 
   constructor(
+    private taskService: TaskService,
     public dialogRef: MatDialogRef<ItemDialog>,
     @Inject(MAT_DIALOG_DATA) public data: TodoItem
   ) {}
+
+
+  onDelete(){
+    this.taskService.deleteTask(this.data.id).subscribe();
+    window.location.reload();
+  }
+
+  onSave(){
+    this.taskService.updateTask(this.data.id, this.data.title, this.data.description, this.data.priority).subscribe();
+    window.location.reload();
+  }
+
+
 }

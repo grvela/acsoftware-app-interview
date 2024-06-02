@@ -4,7 +4,15 @@ mat-card {
     padding: 2rem;
 }
 
+mat-card-title{
+    margin-bottom: 20px;
+}
+
 mat-form-field {
     width: 100%;
     margin-bottom: 1rem;
+}
+
+mat-card-actions{
+ justify-content: space-between;
 }

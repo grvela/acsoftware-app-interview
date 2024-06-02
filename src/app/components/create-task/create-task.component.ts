@@ -7,10 +7,12 @@ import {
   MatDialogActions,
   MatDialogTitle,
   MatDialogContent,
+  MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { TaskService } from '../../services/task.service';
 
-interface Food {
+interface TaskPriority {
   value: string;
   viewValue: string;
 }
@@ -32,9 +34,29 @@ interface Food {
   styleUrl: './create-task.component.scss',
 })
 export class CreateTaskComponent {
-  priorities: Food[] = [
+  title: string = '';
+  description: string = '';
+  selectedPriority: string = '';
+
+  priorities: TaskPriority[] = [
     { value: 'high', viewValue: 'High' },
-    { value: 'in-progress', viewValue: 'In Progress' },
-    { value: 'to-do', viewValue: 'To do' },
+    { value: 'medium', viewValue: 'Medium' },
+    { value: 'low', viewValue: 'Low' },
   ];
+
+  constructor(public dialog: MatDialogRef<string>, private authService: TaskService) {}
+
+  onCreate() {
+    const task = {
+      title: this.title,
+      description: this.description,
+      priority: this.selectedPriority
+    };
+
+    this.authService.createTask(task).subscribe();
+
+    this.dialog.close(task);
+
+    window.location.reload();
+  }
 }

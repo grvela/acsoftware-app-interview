@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Sign Up</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input 
+      type="text"
+      matInput [formControl]="nameFormControl"
+      placeholder="Ex: John Doe" 
+    >
+    @if(nameFormControl.hasError('minlength') && !nameFormControl.hasError('required')){
+      <mat-error>Please, enter a valid name</mat-error>
+    }
+
+    @if(nameFormControl.hasError('required')){
+      <mat-error>Name is <strong>required</strong></mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input 
+      matInput 
+      [formControl]="emailFormControl"
+      type="email" 
+      placeholder="Ex: name@domain.com"
+      >
+      @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+      @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <p>The password must contain at least: <br> 
+      - one special character one number <br> 
+      - one uppercase letter <br> 
+      - one lowercase letter <br> 
+      - and must be at least 6 characters long.</p>
+    <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput 
+      [formControl]="passwordFormControl"
+      type="password" placeholder="Password">
+      @if(passwordFormControl.hasError('pattern') && 
+          passwordFormControl.hasError('minlength') &&
+          !passwordFormControl.hasError('required')){
+            <mat-error>Please enter a valid password</mat-error>
+      } 
+      @if(passwordFormControl.hasError('required')){
+        <mat-error>Password is <strong>required</strong></mat-error>
+      }
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="dialog.close()">Cancel</button>
+  <button mat-button color="primary" (click)="signUp()">Sign Up</button>
+</mat-dialog-actions>
